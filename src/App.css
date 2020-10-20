@@ -1,0 +1,206 @@
+body {
+    overflow-y: scroll;
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+h2 {
+    font-size: 16px;
+    margin: 0;
+}
+
+
+/* Common */
+.container {
+    box-sizing: border-box;
+    max-width: 1140px;
+    margin: 0 auto;
+}
+
+.buttonWrap {
+    width: 200px;
+    height: 40px;
+    position: relative;
+}
+
+.button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #4a90e2;
+    text-align: center;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    border: 0;
+    border-radius: 12px;
+    cursor: pointer;
+    outline: none;
+    transition: .2s linear;
+}
+
+.inputWrap {
+    margin-bottom: 10px;
+    border-radius: 2px;
+    height: 35px;
+    position: relative;
+}
+
+.input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    border: 1px solid #eaeaea;
+    outline: none;
+}
+
+
+/* Header */
+.header {
+    padding: 15px 0 25px;
+    background-color: #000;
+}
+
+.headerLeft {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+header .container {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    vertical-align: center;
+    height: 60px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+header .logo {
+    cursor: pointer;
+    height: 26px;
+    display: block;
+    padding: 0 16px;
+}
+
+header .menu {
+    color: #fff;
+    font-weight: 600;
+}
+
+header .menu ul {
+    display: flex;
+    padding-left: 0;
+}
+
+header .menu li {
+    list-style: none;
+    padding: 0 5px;
+    font-size: 15px;
+}
+
+
+/* Order */
+.order {
+    display: grid;
+    grid-template-columns: 75% auto;
+    grid-gap: 20px;
+    padding: 0 15px;
+}
+/* Почему вылазит инпут */
+.orderLeft {
+    box-sizing: border-box;
+    margin-top: 55px;
+    padding: 0 15px;
+}
+
+.order a {
+    color: #4a90e2;
+}
+
+.order__editing {
+}
+
+.order__editing h2 {
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.order__editing p {
+    font-size: 15px;
+    line-height: 26px;
+}
+
+/*right*/
+.order__submit {
+    margin-top: 93px;
+    border-top: 1px solid #eaeaea;
+    position: sticky;
+    top: 10px;
+}
+
+.order__submit .price {
+    text-align: center;
+    margin-top: 30px;
+    padding: 0 20px;
+    margin-bottom: 25px;
+}
+
+.order__submit .price span {
+    color: #333;
+    font-size: 22px;
+    font-weight: 700;
+    padding-right: 5px;
+}
+
+.order__submit .buttonWrap {
+    margin-top: 10px;
+    width: 100%;
+    height: 35px;
+}
+.order__submit .button {
+background-color: #1b5dab;
+}
+
+
+/* @MEDIA */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 960px;
+    }
+}
+
+@media (max-width: 990px) {
+    .container {
+        max-width: 720px;
+    }
+}
+
+@media (max-width: 770px) {
+    .container {
+        max-width: 540px;
+    }
+
+    .button {
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 568px) {
+    .container {
+        max-width: 100%;
+    }
+}
