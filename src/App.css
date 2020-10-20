@@ -1,6 +1,7 @@
 body {
     overflow-y: scroll;
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    color: #212529;
 }
 
 h2 {
@@ -51,13 +52,59 @@ h2 {
     position: relative;
 }
 
-.input {
+.textareaWrap {
+    position: relative;
+}
+
+.inputWrap:focus,
+.textarea:focus {
+    border: 1px solid #4a90e2;
+}
+
+.input,
+.textarea {
+    position: relative;
     width: 100%;
     box-sizing: border-box;
     padding: 5px 10px;
     border: 1px solid #eaeaea;
     outline: none;
+    height: auto;
 }
+
+.textarea {
+    resize: none;
+    width: 100%;
+    min-height: 250px;
+    border-radius: 2px;
+    border: 1px solid #eaeaea;
+    padding: 12px;
+}
+
+.input {
+    min-height: 100%;
+}
+
+.input:focus {
+    border: 1px solid #4a90e2;
+}
+
+.bgBlackout {
+    background-color: #000;
+    height: 100%;
+    left: 0;
+    opacity: 0.50;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.selectWrap {
+}
+
 
 
 /* Header */
@@ -76,6 +123,7 @@ h2 {
 a {
     color: inherit;
     text-decoration: none;
+    z-index: 0;
 }
 
 header .container {
@@ -120,7 +168,7 @@ header .menu li {
     grid-gap: 20px;
     padding: 0 15px;
 }
-/* Почему вылазит инпут */
+
 .orderLeft {
     box-sizing: border-box;
     margin-top: 55px;
@@ -144,7 +192,50 @@ header .menu li {
     line-height: 26px;
 }
 
-/*right*/
+.order__editing .emailWrap:before {
+    content: "*";
+    position: absolute;
+    color: red;
+    top: -5px;
+    left: -12px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.order__editing .fileDownload {
+    position: absolute;
+    top: 13px;
+    left: 155px;
+    color: #4a90e2;
+    cursor: pointer;
+}
+
+.order__editing .fileDownload select {
+    margin-left: 6px;
+    position: absolute;
+    top: -2px;
+}
+
+.order__language .radioButtons .circle {
+    margin-right: 5px;
+    border-radius: 50%;
+    border: 1px solid #4a90e2;
+    width: 13px;
+    height: 13px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+    /*right*/
 .order__submit {
     margin-top: 93px;
     border-top: 1px solid #eaeaea;
@@ -171,8 +262,9 @@ header .menu li {
     width: 100%;
     height: 35px;
 }
+
 .order__submit .button {
-background-color: #1b5dab;
+    background-color: #1b5dab;
 }
 
 
