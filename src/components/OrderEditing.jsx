@@ -6,7 +6,7 @@ const OrderEditing = () => {
     const [file, setFile] = useState(false);
     const [extension, setExtension] = useState('doc');
 
-    const switchArbText = (e) => {
+    const getArbText = (e) => {
         setArbText(e.target.value);
     }
     const switchSelectFile = () => {
@@ -33,7 +33,7 @@ const OrderEditing = () => {
 
             <div className="textareaWrap">
 
-                <textarea onChange={switchArbText} placeholder="Уведіть текст або" className="textarea"></textarea>
+                <textarea onChange={getArbText} placeholder="Уведіть текст або" className="textarea"></textarea>
 
 
                 <div className="fileDownload">
@@ -46,7 +46,7 @@ const OrderEditing = () => {
                     }
 
                     {
-                        file &&
+                        file && arbText.length === 0 &&
                         <>
                             <select onChange={selectExtension}>
                                 <option defaultValue value="doc">example.doc</option>

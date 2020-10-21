@@ -4,11 +4,29 @@ body {
     color: #212529;
 }
 
-h2 {
-    font-size: 16px;
+dd,
+h1,
+h2,
+h3,
+h4,
+h5,
+ul,
+p,
+figure,
+article,
+form,
+button {
     margin: 0;
+    padding: 0;
 }
 
+h2 {
+    font-size: 16px;
+}
+
+h3 {
+    font-size: 13px;
+}
 
 /* Common */
 .container {
@@ -78,31 +96,20 @@ h2 {
     min-height: 250px;
     border-radius: 2px;
     border: 1px solid #eaeaea;
-    padding: 12px;
+    padding-top: 12px;
 }
 
 .input {
     min-height: 100%;
 }
 
+.input::placeholder,
+.textarea::placeholder {
+color: #a9a9a9;
+}
+
 .input:focus {
     border: 1px solid #4a90e2;
-}
-
-.bgBlackout {
-    background-color: #000;
-    height: 100%;
-    left: 0;
-    opacity: 0.50;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-    margin: 0 auto;
-    text-align: center;
-}
-
-.selectWrap {
 }
 
 
@@ -190,6 +197,7 @@ header .menu li {
 .order__editing p {
     font-size: 15px;
     line-height: 26px;
+    margin-bottom: 7px;
 }
 
 .order__editing .emailWrap:before {
@@ -216,13 +224,48 @@ header .menu li {
     top: -2px;
 }
 
-.order__language .radioButtons .circle {
+
+.order__language {
+    margin-bottom: 40px;
+}
+
+.order__language h3 {
+    margin-top: 40px;
+    margin-bottom: 21px;
+    text-transform: uppercase;
+}
+
+.order__language .radioButtonWrap {
+    display: flex;
+    cursor: pointer;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.order__language .radioButtons .radioButton {
+    margin-top: 1px;
     margin-right: 5px;
     border-radius: 50%;
     border: 1px solid #4a90e2;
     width: 13px;
     height: 13px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+
+.order__language .radioButtons .active .radioButton {
+    background-color: #4a90e2;
+}
+
+.radioButton .point {
+    background-color: #fff;
+    border-radius: 50%;
+    width: 5px;
+    height: 5px;
+}
+
+
 
 
 

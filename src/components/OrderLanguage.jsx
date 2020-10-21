@@ -1,37 +1,46 @@
 import React, {useState} from 'react';
 import classnames from 'classnames';
 
+const languages = [
+    {name: 'Українська', key: 'ua'},
+    {name: 'Російська', key: 'ru'},
+    {name: 'Англійська', key: 'en'}
+];
+
+
+const LanguagesGroup = ({languages, toggleRadio, activeRadio}) => {
+
+    return (
+        languages.map((el) => {
+            return (
+                <div className={classnames('radioButtonWrap', {'active': el.key === activeRadio})}
+                     onClick={() => toggleRadio(el.key)}
+                     key={el.key}>
+
+                    <div className="radioButton">
+                        <div className="point"/>
+                    </div>
+                    <span>{el.name}</span>
+                </div>
+            )
+        })
+    )
+}
+
 
 const OrderLanguage = () => {
 
-    const [show, setShow] = useState({ua: false, ru: false, en: false});
+    const [activeRadio, setActiveRadio] = useState('')
 
-    const toggleClass = (key) => {
-        setShow({
-            ...show,
-            [key]: !show[key]
-        });
-    };
+    const toggleRadio = (key) => {
+        setActiveRadio(key);
+    }
 
     return (
         <div className="order__language">
             <h3>Мова</h3>
             <div className="radioButtons">
-
-                <div  className={classnames('radioButton', { 'active': show })}>
-                    <div className="circle"/>
-                    <input type="checkbox" name="ua" value="ua" />
-                        <label>Українська</label>
-                </div>
-
-                <div id="ru" className="radioButton">
-                    <div className="circle"/>
-                    <span>Російська</span>
-                </div>
-                <div id="en" className="radioButton">
-                    <div className="circle"/>
-                    <span>Англійська</span>
-                </div>
+                <LanguagesGroup languages={languages} toggleRadio={toggleRadio} activeRadio={activeRadio}/>
             </div>
         </div>
     );
