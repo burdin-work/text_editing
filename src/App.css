@@ -1,4 +1,10 @@
-body {
+html{
+    height: 100%;
+}
+body{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
     overflow-y: scroll;
     font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
     color: #212529;
@@ -116,6 +122,7 @@ color: #a9a9a9;
 
 /* Header */
 .header {
+    flex: 0 0 auto;
     padding: 15px 0 25px;
     background-color: #000;
 }
@@ -169,6 +176,10 @@ header .menu li {
 
 
 /* Order */
+.main-content {
+    flex: 1 0 auto;
+}
+
 .order {
     display: grid;
     grid-template-columns: 75% auto;
@@ -224,6 +235,22 @@ header .menu li {
     top: -2px;
 }
 
+.blackBg {
+    background-color: rgba(74, 144, 226, 0.3);
+}
+
+.textarea.blackBg {
+    padding-top: 40px;
+}
+
+.symbolsLength {
+    color: #999;
+    font-weight: 700;
+    font-size: 12px;
+    margin-left: 2px;
+
+}
+
 
 .order__language {
     margin-bottom: 40px;
@@ -266,18 +293,6 @@ header .menu li {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     /*right*/
 .order__submit {
     margin-top: 93px;
@@ -310,6 +325,29 @@ header .menu li {
     background-color: #1b5dab;
 }
 
+
+/* Footer */
+.footer {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    color: #000;
+    font-weight: 600;
+    font-size: 18px;
+    margin-top: 100px;
+    height: 100px;
+}
+
+.footerHalf {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer a {
+    padding: 8px 15px;
+}
 
 /* @MEDIA */
 @media (max-width: 1200px) {

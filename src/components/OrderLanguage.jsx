@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
 const languages = [
@@ -11,7 +11,7 @@ const languages = [
 const LanguagesGroup = ({languages, toggleRadio, activeRadio}) => {
 
     return (
-        languages.map((el) => {
+        languages.map(el => {
             return (
                 <div className={classnames('radioButtonWrap', {'active': el.key === activeRadio})}
                      onClick={() => toggleRadio(el.key)}
@@ -28,19 +28,13 @@ const LanguagesGroup = ({languages, toggleRadio, activeRadio}) => {
 }
 
 
-const OrderLanguage = () => {
-
-    const [activeRadio, setActiveRadio] = useState('')
-
-    const toggleRadio = (key) => {
-        setActiveRadio(key);
-    }
+const OrderLanguage = ({toggleLanguageRadio, activeRadio}) => {
 
     return (
         <div className="order__language">
             <h3>Мова</h3>
             <div className="radioButtons">
-                <LanguagesGroup languages={languages} toggleRadio={toggleRadio} activeRadio={activeRadio}/>
+                <LanguagesGroup languages={languages} toggleRadio={toggleLanguageRadio} activeRadio={activeRadio}/>
             </div>
         </div>
     );

@@ -1,24 +1,27 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
+import DropDownList from "./DropDownList";
+import ExampleFile from "./ExampleFile";
+import {dataAPI} from "../../utils/API";
+import axios from "axios";
 
-const OrderEditing = () => {
+const OrderEditing = ({selectExtension, getAreaText, areaText, data, setData}) => {
 
-    const [arbText, setArbText] = useState('');
     const [file, setFile] = useState(false);
-    const [extension, setExtension] = useState('doc');
 
-    const getArbText = (e) => {
-        setArbText(e.target.value);
-    }
     const switchSelectFile = () => {
         setFile(true);
     }
-    const selectExtension = (e) => {
-        setExtension(e.target.value);
-    }
 
+    useEffect(() => {
+
+        if(areaText.length === 0) {
+            setFile(false);
+        }
+    }, [areaText])
 
     return (
         <div className="order__editing">
+
             <h2>Замовити редагування</h2>
             <p>Виправимо всі помилки, приберемо всі дурниці, перефразуємо невдалі місця, але сильно текст <br/>не
                 переписуватимемо. Зайвих виправлень не буде. <a href="/">Детальніше про редагування</a></p>
@@ -33,30 +36,25 @@ const OrderEditing = () => {
 
             <div className="textareaWrap">
 
-                <textarea onChange={getArbText} placeholder="Уведіть текст або" className="textarea"></textarea>
-
+                { file ? <ExampleFile setData={setData} data={data} getAreaText={getAreaText} areaText={areaText}/>
+                    : <textarea onChange={getAreaText} placeholder="Уведіть текст або" className="textarea"/>}
 
                 <div className="fileDownload">
 
-                    {
-                        arbText.length === 0
+                    { areaText.length === 0 && !file
                         && <span onClick={switchSelectFile}>
                         завантажте файл
-                    </span>
-                    }
+                    </span> }
 
+                    { file && areaText.length > 0 &&
+                            <DropDownList data={data} setData={setData} selectExtension={selectExtension} areaText={areaText}/> }
+                </div>
+                <div className="symbolsLength">
                     {
-                        file && arbText.length === 0 &&
-                        <>
-                            <select onChange={selectExtension}>
-                                <option defaultValue value="doc">example.doc</option>
-                                <option value="docx">example.docx</option>
-                                <option value="rtf">example.rtf</option>
-                                <option value="other">example.***</option>
-                            </select>
-                        </>
+                        areaText.length > 1e3
+                            ? ('' + areaText.length/1e3).split('.').join(',')
+                            : areaText.length
                     }
-
                 </div>
             </div>
         </div>
