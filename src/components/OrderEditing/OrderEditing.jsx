@@ -1,8 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import DropDownList from "./DropDownList";
 import ExampleFile from "./ExampleFile";
-import {dataAPI} from "../../utils/API";
-import axios from "axios";
 
 const OrderEditing = ({selectExtension, getAreaText, areaText, data, setData}) => {
 
@@ -13,8 +11,7 @@ const OrderEditing = ({selectExtension, getAreaText, areaText, data, setData}) =
     }
 
     useEffect(() => {
-
-        if(areaText.length === 0) {
+        if (areaText.length === 0) {
             setFile(false);
         }
     }, [areaText])
@@ -36,26 +33,24 @@ const OrderEditing = ({selectExtension, getAreaText, areaText, data, setData}) =
 
             <div className="textareaWrap">
 
-                { file ? <ExampleFile setData={setData} data={data} getAreaText={getAreaText} areaText={areaText}/>
+                {file ? <ExampleFile setData={setData} data={data} getAreaText={getAreaText} areaText={areaText}/>
                     : <textarea onChange={getAreaText} placeholder="Уведіть текст або" className="textarea"/>}
 
                 <div className="fileDownload">
-
                     { areaText.length === 0 && !file
-                        && <span onClick={switchSelectFile}>
+                    && <span onClick={switchSelectFile}>
                         завантажте файл
                     </span> }
 
-                    { file && areaText.length > 0 &&
-                            <DropDownList data={data} setData={setData} selectExtension={selectExtension} areaText={areaText}/> }
+                    {file && areaText.length > 0 &&
+                    <DropDownList data={data} setData={setData} selectExtension={selectExtension} areaText={areaText}/>}
+
                 </div>
-                <div className="symbolsLength">
-                    {
-                        areaText.length > 1e3
-                            ? ('' + areaText.length/1e3).split('.').join(',')
-                            : areaText.length
-                    }
-                </div>
+
+                {areaText.length > 0 && <div className="symbolsLength">
+                    {areaText.length}
+                </div>}
+
             </div>
         </div>
     );

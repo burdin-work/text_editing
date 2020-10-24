@@ -17,7 +17,7 @@ const ExampleFile = ({data, setData, getAreaText, areaText}) => {
     }, [])
 
     return (
-        <textarea onChange={getAreaText} placeholder="Уведіть текст або" className="textarea blackBg"
+        <textarea onChange={getAreaText} placeholder="Уведіть текст або" className="textarea darkBg"
                   value={areaText}/>
     );
 };

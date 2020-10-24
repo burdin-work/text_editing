@@ -1,7 +1,7 @@
 import React from 'react';
+import PeriodExecution from "./PeriodExecution";
 
-const OrderSubmit = ({orderPrice}) => {
-
+const OrderSubmit = ({orderPrice, leadTime}) => {
 
 
     return (
@@ -9,6 +9,9 @@ const OrderSubmit = ({orderPrice}) => {
             <div className="price">
                 <span>{orderPrice.toFixed(2).split('.').join(',')}</span><span>грн</span>
             </div>
+
+            <PeriodExecution leadTime={leadTime}/>
+
             <div className="buttonWrap">
                 <button href="/" className="button">Замовити</button>
             </div>

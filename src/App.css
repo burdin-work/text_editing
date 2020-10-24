@@ -235,11 +235,11 @@ header .menu li {
     top: -2px;
 }
 
-.blackBg {
+.darkBg {
     background-color: rgba(74, 144, 226, 0.3);
 }
 
-.textarea.blackBg {
+.textarea.darkBg {
     padding-top: 40px;
 }
 
@@ -304,8 +304,7 @@ header .menu li {
 .order__submit .price {
     text-align: center;
     margin-top: 30px;
-    padding: 0 20px;
-    margin-bottom: 25px;
+    padding: 0 20px 0 20px;
 }
 
 .order__submit .price span {
@@ -323,6 +322,17 @@ header .menu li {
 
 .order__submit .button {
     background-color: #1b5dab;
+}
+
+.leadTimeWrap {
+    padding-left: 20px;
+}
+
+.leadTime {
+    color: #999;
+    font-size: 15px;
+    margin-bottom: 10px;
+    min-height: 17px;
 }
 
 
