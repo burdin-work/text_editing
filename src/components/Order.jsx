@@ -32,8 +32,8 @@ const countTime = (language, extension, textLength) => {
 
     let speed, workHoursToday, numHoursAllTime, numDays, numHoursAndMinutes, numHours, numMinutes;
 
-    const startDate = moment(new Date(),).utc().tz("Europe/Kiev");
     const date = new Date();
+    const startDate = moment(date).utc().tz("Europe/Kiev");
 
     // get timeNow (9:45 -> 9.75)
     const hoursNow = +(((date.getHours() * 60 + date.getMinutes()) / 60).toFixed(2));
