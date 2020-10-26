@@ -51,10 +51,7 @@ const countTime = (language, extension, textLength) => {
 
     if (extension === 'other') numHoursAllTime = numHoursAllTime + numHoursAllTime/100*20;
 
-    console.log('numHoursAllTime= ' + numHoursAllTime);
-    console.log('workHoursToday= ' + workHoursToday);
-
-    // searching numDays
+    // searching numDays & numHoursAndMinutes
     if (numHoursAllTime > workHoursToday) {
 
         numHoursAllTime - workHoursToday > 9
@@ -64,13 +61,10 @@ const countTime = (language, extension, textLength) => {
         numHoursAndMinutes = (numHoursAllTime - workHoursToday) % 9;
     } else {
         numDays = 0;
-
-
         numHoursAndMinutes = 9 - (workHoursToday - numHoursAllTime);
     }
 
     // searching numHours & numMinutes
-    console.log('numHoursAndMinutes= ' + numHoursAndMinutes)
     if (textLength < speed) {
         numHours = 1;
         numMinutes = '30';
