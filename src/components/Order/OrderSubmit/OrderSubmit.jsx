@@ -10,7 +10,7 @@ const OrderSubmit = ({orderPrice, leadTime}) => {
                 <span>{orderPrice.toFixed(2).split('.').join(',')}</span><span>грн</span>
             </div>
 
-            <PeriodExecution leadTime={leadTime}/>
+            { !!orderPrice && <PeriodExecution leadTime={leadTime}/> }
 
             <div className="buttonWrap">
                 <button href="/" className="button">Замовити</button>

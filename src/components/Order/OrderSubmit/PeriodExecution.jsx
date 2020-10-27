@@ -3,7 +3,7 @@ import React from 'react';
 const PeriodExecution = ({leadTime}) => {
     return (
             <div className="leadTimeWrap">
-                <span className="leadTime">{leadTime}</span>
+                <span className="leadTime">Термін виконання: {leadTime.split('/')[0]}  о {leadTime.split('/')[1]}</span>
             </div>
     );
 };

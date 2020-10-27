@@ -22,59 +22,55 @@ export const priceCalculation = (language, extension, textLength) => {
 }
 
 
-export const countTime = (language, extension, textLength, date = new Date()) => {
+export const countTime = (language, extension, textLength, date = undefined, debugInfo = undefined) => {
 
-    let speed, workHoursToday, numHoursAllTime, numDays, numHoursAndMinutes, numHours, numMinutes;
+    let startDate, speed, workHoursToday, numHoursAllTime, numDays, hoursAfter10, numHours, numMinutes;
 
-    const startDate = moment(date).utc().tz("Europe/Kiev");
+    // For testing a function with a different date
+    startDate  =  date  ?  moment(new Date(date))  :  moment(new Date()).utc().tz("Europe/Kiev");
 
-    // get timeNow (9:45 -> 9.75)
-    const hoursNow = +(((date.getHours() * 60 + date.getMinutes()) / 60).toFixed(2));
+    // get time now (9:45 -> 9.75)
+    const hoursNow = +( (( startDate.hours() * 60 + startDate.minutes() ) / 60).toFixed(2) );
 
-    workHoursToday = (hoursNow > 17.5 || moment(date).isoWeekday() === 6 || moment(date).isoWeekday() === 7)
+    workHoursToday = (hoursNow >= 19 || moment(startDate).isoWeekday() === 6 || moment(startDate).isoWeekday() === 7)
         ? 0
-        : 19 - hoursNow;
+        : hoursNow < 10
+            ? 9
+            : 19 - hoursNow;
 
     speed = (language === 'en') ? 333 : 1333;
 
     // searching numHoursAllTime
-    numHoursAllTime = (textLength > speed)
+    numHoursAllTime = ( textLength > speed  )
         ? textLength / speed + 0.5
-        : 0.5;
+        : 0.99;// for getting (9>5) & numMinutes = '00'
 
-    if (extension === 'other') numHoursAllTime = numHoursAllTime + numHoursAllTime/100*20;
+    if (extension === 'other' && numHoursAllTime !== 0.99) numHoursAllTime = numHoursAllTime + numHoursAllTime/100*20;
 
-    // searching numDays & numHoursAndMinutes
+    // searching numDays & hoursAfter10
     if (numHoursAllTime > workHoursToday) {
 
         numDays = (numHoursAllTime - workHoursToday > 9)
             ? Math.floor((numHoursAllTime - workHoursToday) / 9) + 1
             : 1;
+        hoursAfter10 = (numHoursAllTime - workHoursToday) % 9;
 
-        numHoursAndMinutes = (numHoursAllTime - workHoursToday) % 9;
-    } else {
+    }
+    // -- do all work today
+    else {
         numDays = 0;
-        numHoursAndMinutes = 9 - (workHoursToday - numHoursAllTime);
+        hoursAfter10 = (hoursNow > 10 && hoursNow < 19)
+        ? (hoursNow-10) + numHoursAllTime
+        : 9 - (workHoursToday - numHoursAllTime);
     }
-
     // searching numHours & numMinutes
-    if (textLength < speed) {
-        numHours = 1;
-        numMinutes = '30';
-    } else {
+        numHours = Math.round(hoursAfter10);
 
-        if (numHoursAndMinutes <= 0.5) {
-            numHours = 0;
-            numMinutes = '30';
+        if (+(String(hoursAfter10).split('.')[1][0]) >= 5) {
+            numMinutes = '00';
         } else {
-            numHours = Math.round(numHoursAndMinutes);
-            if (+(String(numHoursAndMinutes).split('.')[1][0]) >= 5) {
-                numMinutes = '00';
-            } else {
-                numMinutes = '30';
-            }
+            numMinutes = '30';
         }
-    }
 
     // moment.js plugin allows to define date by iterating over weekdays only
     let desiredDate = moment(startDate).isoAddWeekdaysFromSet({
@@ -83,5 +79,18 @@ export const countTime = (language, extension, textLength, date = new Date()) =>
         'exclusions': []
     }).format('DD.MM.YY');
 
-    return 'Термін виконання: ' + desiredDate + '  о ' + (numHours + 10) + ':' + numMinutes;
+    debugInfo && console.log(`
+    startDate =${startDate.format('DD.MM.YY/HH:mm ')}
+    textLength = ${textLength}
+    speed = ${speed}
+    hoursNow = ${hoursNow}
+    numDays = ${numDays}
+    workHoursToday = ${workHoursToday}
+    numHoursAllTime = ${numHoursAllTime}
+    hoursAfter10 = ${hoursAfter10}
+    ///
+    return ${desiredDate + '/' + (numHours + 10) + ':' + numMinutes}
+    `);
+
+    return desiredDate + '/' + (numHours + 10) + ':' + numMinutes;
 }
