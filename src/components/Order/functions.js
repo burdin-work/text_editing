@@ -23,7 +23,6 @@ export const priceCalculation = (language, extension, textLength) => {
 
 
 export const countTime = (language, extension, textLength, date = undefined, debugInfo = undefined) => {
-
     let startDate, speed, workHoursToday, numHoursAllTime, numDays, hoursAfter10, numHours, numMinutes;
 
     // For testing a function with a different date

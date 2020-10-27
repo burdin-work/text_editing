@@ -52,6 +52,7 @@ describe('Count Time function:', () => {
            (hoursNow = ** & holiday) || (hoursNow < 10 & working day)
            || ( (hoursNow > 10 & hoursNow < 19) & working day)
            || (hoursNow > 19 & working day)
+           || (hoursNow > 18 & hoursNow < 19 & working day)
     */
     const less333 = 276;
     const more333 = 2150;
@@ -181,4 +182,7 @@ describe('Count Time function:', () => {
         expect(countTime('ua', 'doc', less1333, (dayWorking+timeMore19), toggleInfo )).toBe('15.10.20/11:00')
     });
 
+    test("(hoursNow > 18:00 & hoursNow < 19:00 & working day", () => {
+        expect(countTime('ua', 'doc', less1333, (dayWorking+'T18:06'), toggleInfo )).toBe('15.10.20/10:30')
+    });
 });
