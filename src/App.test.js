@@ -67,20 +67,20 @@ describe('Count Time function:', () => {
     const time10to19 = 'T15:24';
     const timeMore19 = 'T22:44';
 
-    const toggleInfo = true;
+    const toggleInfo = undefined;
 
     // (language === 'en') & (extension === 'other') & (textLength > speed)
     test("(language === 'en') & (extension === 'other') & (textLength > speed) & (hoursNow = ** & holiday)", () => {
-        expect(countTime('en', 'other', more333, fullDateHoliday, toggleInfo )).toBe('26.10.20/18:30')
+        expect(countTime('en', 'other', more333, fullDateHoliday, toggleInfo )).toBe('26.10.20/18:15')
     });
     test("(language === 'en') & (extension === 'other') & (textLength > speed) & (hoursNow < 10 & working day)", () => {
-        expect(countTime('en', 'other', more333, (dayWorking + timeLess10), toggleInfo)).toBe('14.10.20/18:30')
+        expect(countTime('en', 'other', more333, (dayWorking + timeLess10), toggleInfo)).toBe('14.10.20/18:15')
     });
     test("(language === 'en') & (extension === 'other') & (textLength > speed) & (hoursNow > 10 & hoursNow < 19 & working day)", () => {
-        expect(countTime('en', 'other', more333, (dayWorking + time10to19), toggleInfo )).toBe('15.10.20/15:00')
+        expect(countTime('en', 'other', more333, (dayWorking + time10to19), toggleInfo )).toBe('15.10.20/14:45')
     });
     test("(language === 'en') & (extension === 'other') & (textLength > speed) & (hoursNow > 19 & working day)", () => {
-        expect(countTime('en', 'other', more333, (dayWorking + timeMore19), toggleInfo )).toBe('15.10.20/18:30')
+        expect(countTime('en', 'other', more333, (dayWorking + timeMore19), toggleInfo )).toBe('15.10.20/18:15')
     });
     
     // (language === 'en') & (extension === 'other') & (textLength < speed)
@@ -91,7 +91,7 @@ describe('Count Time function:', () => {
         expect(countTime('en', 'other', less333, (dayWorking+timeLess10), toggleInfo )).toBe('14.10.20/11:00')
     });
     test("(language === 'en') & (extension === 'other') & (textLength < speed) & (hoursNow < 10 & working day)", () => {
-        expect(countTime('en', 'other', less333, (dayWorking+time10to19), toggleInfo )).toBe('14.10.20/16:30')
+        expect(countTime('en', 'other', less333, (dayWorking+time10to19), toggleInfo )).toBe('14.10.20/16:15')
     });
     test("(language === 'en') & (extension === 'other') & (textLength < speed) & (hoursNow > 19 & working day)", () => {
         expect(countTime('en', 'other', less333, (dayWorking+timeMore19), toggleInfo )).toBe('15.10.20/11:00')
@@ -105,7 +105,7 @@ describe('Count Time function:', () => {
         expect(countTime('en', 'docx', more333, (dayWorking+timeLess10), toggleInfo )).toBe('14.10.20/17:00')
     });
     test("(language === 'en') & (extension !== 'other') & (textLength > speed) & (hoursNow > 10 & hoursNow < 19 & working day)", () => {
-        expect(countTime('en', 'rtf', more333, (dayWorking+time10to19), toggleInfo )).toBe('15.10.20/13:30')
+        expect(countTime('en', 'rtf', more333, (dayWorking+time10to19), toggleInfo )).toBe('15.10.20/13:15')
     });
     test("(language === 'en') & (extension !== 'other') & (textLength > speed) & (hoursNow > 19 & working day)", () => {
         expect(countTime('en', 'doc', more333, (dayWorking+timeMore19), toggleInfo )).toBe('15.10.20/17:00')
@@ -119,7 +119,7 @@ describe('Count Time function:', () => {
         expect(countTime('en', 'docx', less333, (dayWorking+timeLess10), toggleInfo )).toBe('14.10.20/11:00')
     });
     test("(language === 'en') & (extension !== 'other') & (textLength < speed) & (hoursNow > 10 & hoursNow < 19 & working day)", () => {
-        expect(countTime('en', 'rtf', less333, (dayWorking+time10to19), toggleInfo )).toBe('14.10.20/16:30')
+        expect(countTime('en', 'rtf', less333, (dayWorking+time10to19), toggleInfo )).toBe('14.10.20/16:15')
     });
     test("(language === 'en') & (extension !== 'other') & (textLength < speed) & (hoursNow > 19 & working day)", () => {
         expect(countTime('en', 'doc', less333, (dayWorking+timeMore19), toggleInfo )).toBe('15.10.20/11:00')
@@ -128,16 +128,16 @@ describe('Count Time function:', () => {
 
     // (language !== 'en') & (extension === 'other') & (textLength > speed)
     test("(language !== 'en') & (extension === 'other') & (textLength > speed) & (hoursNow = ** & holiday)", () => {
-        expect(countTime('ua', 'other', more1333, fullDateHoliday, toggleInfo )).toBe('26.10.20/15:30')
+        expect(countTime('ua', 'other', more1333, fullDateHoliday, toggleInfo )).toBe('26.10.20/15:00')
     });
     test("(language !== 'en') & (extension === 'other') & (textLength > speed) & (hoursNow < 10 & working day)", () => {
-        expect(countTime('ru', 'other', more1333, (dayWorking + timeLess10), toggleInfo)).toBe('14.10.20/15:30')
+        expect(countTime('ru', 'other', more1333, (dayWorking + timeLess10), toggleInfo)).toBe('14.10.20/15:00')
     });
     test("(language !== 'en') & (extension === 'other') & (textLength > speed) & (hoursNow > 10 & hoursNow < 19 & working day)", () => {
         expect(countTime('ua', 'other', more1333, (dayWorking + time10to19), toggleInfo )).toBe('15.10.20/11:30')
     });
     test("(language !== 'en') & (extension === 'other') & (textLength > speed) & (hoursNow > 19 & working day)", () => {
-        expect(countTime('ru', 'other', more1333, (dayWorking + timeMore19), toggleInfo )).toBe('15.10.20/15:30')
+        expect(countTime('ru', 'other', more1333, (dayWorking + timeMore19), toggleInfo )).toBe('15.10.20/15:00')
     });
 
     // (language !== 'en') & (extension === 'other') & (textLength < speed)
@@ -148,7 +148,7 @@ describe('Count Time function:', () => {
         expect(countTime('ru', 'other', less1333, (dayWorking+timeLess10), toggleInfo )).toBe('14.10.20/11:00')
     });
     test("(language !== 'en') & (extension === 'other') & (textLength < speed) & (hoursNow < 10 & working day)", () => {
-        expect(countTime('ua', 'other', less1333, (dayWorking+time10to19), toggleInfo )).toBe('14.10.20/16:30')
+        expect(countTime('ua', 'other', less1333, (dayWorking+time10to19), toggleInfo )).toBe('14.10.20/16:15')
     });
     test("(language !== 'en') & (extension === 'other') & (textLength < speed) & (hoursNow > 19 & working day)", () => {
         expect(countTime('ru', 'other', less1333, (dayWorking+timeMore19), toggleInfo )).toBe('15.10.20/11:00')
@@ -156,16 +156,16 @@ describe('Count Time function:', () => {
 
     // (language !== 'en') & (extension !== 'other') & (textLength > speed)
     test("(language !== 'en') & (extension !== 'other') & (textLength > speed) & (hoursNow = ** & holiday)", () => {
-        expect(countTime('ua', 'doc', more1333, fullDateHoliday, toggleInfo )).toBe('26.10.20/14:30')
+        expect(countTime('ua', 'doc', more1333, fullDateHoliday, toggleInfo )).toBe('26.10.20/14:15')
     });
     test("(language !== 'ru') & (extension !== 'other') & (textLength > speed) & (hoursNow < 10 & working day)", () => {
-        expect(countTime('ru', 'rtf', more1333, (dayWorking+timeLess10), toggleInfo )).toBe('14.10.20/14:30')
+        expect(countTime('ru', 'rtf', more1333, (dayWorking+timeLess10), toggleInfo )).toBe('14.10.20/14:15')
     });
     test("(language !== 'en') & (extension !== 'other') & (textLength > speed) & (hoursNow > 10 & hoursNow < 19 & working day)", () => {
-        expect(countTime('ua', 'docx', more1333, (dayWorking+time10to19), toggleInfo )).toBe('15.10.20/11:00')
+        expect(countTime('ua', 'docx', more1333, (dayWorking+time10to19), toggleInfo )).toBe('15.10.20/10:30')
     });
     test("(language !== 'en') & (extension !== 'other') & (textLength > speed) & (hoursNow > 19 & working day)", () => {
-        expect(countTime('ru', 'doc', more1333, (dayWorking+timeMore19), toggleInfo )).toBe('15.10.20/14:30')
+        expect(countTime('ru', 'doc', more1333, (dayWorking+timeMore19), toggleInfo )).toBe('15.10.20/14:15')
     });
 
     // (language !== 'en') & (extension !== 'other') & (textLength < speed)
@@ -176,7 +176,7 @@ describe('Count Time function:', () => {
         expect(countTime('ua', 'docx', less1333, (dayWorking+timeLess10), toggleInfo )).toBe('14.10.20/11:00')
     });
     test("(language !== 'en') & (extension !== 'other') & (textLength < speed) & (hoursNow > 10 & hoursNow < 19 & working day)", () => {
-        expect(countTime('ru', 'rtf', less1333, (dayWorking+time10to19), toggleInfo )).toBe('14.10.20/16:30')
+        expect(countTime('ru', 'rtf', less1333, (dayWorking+time10to19), toggleInfo )).toBe('14.10.20/16:15')
     });
     test("(language !== 'en') & (extension !== 'other') & (textLength < speed) & (hoursNow > 19 & working day)", () => {
         expect(countTime('ua', 'doc', less1333, (dayWorking+timeMore19), toggleInfo )).toBe('15.10.20/11:00')
@@ -185,4 +185,6 @@ describe('Count Time function:', () => {
     test("(hoursNow > 18:00 & hoursNow < 19:00 & working day", () => {
         expect(countTime('ua', 'doc', less1333, (dayWorking+'T18:06'), toggleInfo )).toBe('15.10.20/10:30')
     });
+
+
 });

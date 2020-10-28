@@ -19,7 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "jest",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -38,6 +38,7 @@
     ]
   },
   "devDependencies": {
-    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2"
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "jest-each": "^26.6.1"
   }
 }

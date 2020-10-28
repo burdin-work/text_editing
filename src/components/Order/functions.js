@@ -22,8 +22,20 @@ export const priceCalculation = (language, extension, textLength) => {
 }
 
 
-export const countTime = (language, extension, textLength, date = undefined, debugInfo = undefined) => {
+export const countTime = (language,
+                          extension,
+                          textLength = undefined,
+                          date = undefined,
+                          debugInfo = undefined,
+                          durationHours = undefined) => {
+
     let startDate, speed, workHoursToday, numHoursAllTime, numDays, hoursAfter10, numHours, numMinutes;
+
+    // conversion for testing
+    if(date && date.includes(', ')) {
+
+        date = moment(date, 'DD/MM/YYYY, HH:mm ddd').format('MMMM DD, YYYY HH:mm:ss');
+    }
 
     // For testing a function with a different date
     startDate  =  date  ?  moment(new Date(date))  :  moment(new Date()).utc().tz("Europe/Kiev");
@@ -39,10 +51,14 @@ export const countTime = (language, extension, textLength, date = undefined, deb
 
     speed = (language === 'en') ? 333 : 1333;
 
-    // searching numHoursAllTime
-    numHoursAllTime = ( textLength > speed  )
-        ? textLength / speed + 0.5
-        : 0.99;// for getting (9>5) & numMinutes = '00'
+    // searching numHoursAllTime (depending on the received data: $textLength or $durationHours)
+    if(textLength){
+        numHoursAllTime = ( textLength > speed  )
+            ? textLength / speed + 0.5
+            : 0.99;// for getting (9>5) & numMinutes = '00'
+    } else {
+        numHoursAllTime = durationHours;
+    }
 
     if (extension === 'other' && numHoursAllTime !== 0.99) numHoursAllTime = numHoursAllTime + numHoursAllTime/100*20;
 
@@ -53,30 +69,39 @@ export const countTime = (language, extension, textLength, date = undefined, deb
             ? Math.floor((numHoursAllTime - workHoursToday) / 9) + 1
             : 1;
         hoursAfter10 = (numHoursAllTime - workHoursToday) % 9;
-
     }
     // -- do all work today
     else {
         numDays = 0;
         hoursAfter10 = (hoursNow > 10 && hoursNow < 19)
-        ? (hoursNow-10) + numHoursAllTime
-        : 9 - (workHoursToday - numHoursAllTime);
+            ? (hoursNow-10) + numHoursAllTime
+            : 9 - (workHoursToday - numHoursAllTime);
     }
-    // searching numHours & numMinutes
-        numHours = Math.round(hoursAfter10);
 
-        if (+(String(hoursAfter10).split('.')[1][0]) >= 5) {
-            numMinutes = '00';
-        } else {
-            numMinutes = '30';
-        }
+    // searching numHours & numMinutes
+    if(hoursAfter10 < 0.5) hoursAfter10 = 0.5;
+
+    const positionMinutes = String(hoursAfter10 + 0.00001).split('.')[1][0];
+    numHours = (+positionMinutes >=9) ? Math.round(hoursAfter10) : Math.floor(hoursAfter10);
+    const closerTo0 = '019';
+    const closerTo15 = '23';
+    const closerTo30 = '456';
+    if(closerTo0.includes(positionMinutes)){
+        numMinutes = '00';
+    } else if(closerTo30.includes(positionMinutes)){
+        numMinutes = '30';
+    } else if(closerTo15.includes(positionMinutes)){
+        numMinutes = '15';
+    } else {
+        numMinutes = '45';
+    }
 
     // moment.js plugin allows to define date by iterating over weekdays only
     let desiredDate = moment(startDate).isoAddWeekdaysFromSet({
         'workdays': numDays,
         'weekdays': [1, 2, 3, 4, 5],
         'exclusions': []
-    }).format('DD.MM.YY');
+    });
 
     debugInfo && console.log(`
     startDate =${startDate.format('DD.MM.YY/HH:mm ')}
@@ -88,8 +113,15 @@ export const countTime = (language, extension, textLength, date = undefined, deb
     numHoursAllTime = ${numHoursAllTime}
     hoursAfter10 = ${hoursAfter10}
     ///
-    return ${desiredDate + '/' + (numHours + 10) + ':' + numMinutes}
+    return ${desiredDate.format('YYYY-MM-DD') + '/' + (numHours + 10) + ':' + numMinutes}
     `);
 
-    return desiredDate + '/' + (numHours + 10) + ':' + numMinutes;
+    // fork for testing
+    if(textLength) {
+        return desiredDate.format('DD.MM.YY') + '/' + (numHours + 10) + ':' + numMinutes;
+    } else {
+        const newDate = new Date(desiredDate.format('YYYY-MM-DD') + 'T' + (numHours + 10) + ':' + numMinutes);
+        return moment(newDate).format('DD/MM/YYYY, HH:mm dddd');
+    }
 }
+
