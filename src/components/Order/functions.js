@@ -55,7 +55,7 @@ export const countTime = (language,
     if(textLength){
         numHoursAllTime = ( textLength > speed  )
             ? textLength / speed + 0.5
-            : 0.99;// for getting (9>5) & numMinutes = '00'
+            : 0.99;
     } else {
         numHoursAllTime = durationHours;
     }
