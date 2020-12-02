@@ -1,5 +1,5 @@
-import each from "jest-each";
-import {countTime} from './components/Order/functions.js'
+import each from 'jest-each';
+import { countTime } from './components/Order/functions';
 
 const toggleInfo = undefined;
 each`
@@ -19,7 +19,19 @@ each`
     ${'27/09/2019, 17:00 Friday'}    | ${8}          | ${'30/09/2019, 16:00 Monday'}
     ${'27/09/2019, 19:00 Friday'}    | ${8}          | ${'30/09/2019, 18:00 Monday'}
     ${'28/09/2019, 10:00 Saturday'}  | ${8}          | ${'30/09/2019, 18:00 Monday'}
-`.test('returns $expectedResult when using $startTime and durationHours', ({startTime, durationHours, expectedResult}) => {
-    expect(countTime('ru', 'doc', undefined, startTime, toggleInfo, durationHours)).toBe(expectedResult);
-});
-
+`.test(
+        'returns $expectedResult when using $startTime and durationHours',
+        ({ startTime, durationHours, expectedResult }) => {
+            // eslint-disable-next-line jest/no-standalone-expect
+            expect(
+                countTime(
+                    'ru',
+                    'doc',
+                    undefined,
+                    startTime,
+                    toggleInfo,
+                    durationHours,
+                ),
+            ).toBe(expectedResult);
+        },
+    );

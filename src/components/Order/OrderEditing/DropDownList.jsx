@@ -1,17 +1,16 @@
-import React, {useEffect} from 'react';
-import axios from "axios";
+import React, { useEffect } from 'react';
+import axios from 'axios';
 
-const DropDownList = ({selectExtension, data, setData}) => {
-
+const DropDownList = ({ selectExtension, data, setData }) => {
     useEffect(() => {
-        axios.get('/data.json').then(response => {
+        axios.get('/data.json').then((response) => {
             setData({
                 ...data,
-                areaText: response.data['exampleText']
+                areaText: response.data.response,
             });
-
         });
-    }, [data.extension])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data.extension]);
 
     return (
         <select onChange={selectExtension}>

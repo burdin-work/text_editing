@@ -68,6 +68,12 @@ h3 {
     outline: none;
     transition: .2s linear;
 }
+.button:hover {
+    opacity: .9;
+}
+.button:active {
+    background-color: #3779c1;
+}
 
 .inputWrap {
     margin-bottom: 10px;
@@ -304,7 +310,7 @@ header .menu li {
 .order__submit .price {
     text-align: center;
     margin-top: 30px;
-    padding: 0 20px 0 20px;
+    padding: 0 20px 5px 20px;
 }
 
 .order__submit .price span {
@@ -322,10 +328,14 @@ header .menu li {
 
 .order__submit .button {
     background-color: #1b5dab;
+    color: #fff;
+}
+.order__submit .button:active {
+    background-color: #294390;
 }
 
 .leadTimeWrap {
-    padding-left: 20px;
+    text-align: center;
 }
 
 .leadTime {
