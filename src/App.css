@@ -69,7 +69,7 @@ h3 {
     transition: .2s linear;
 }
 .button:hover {
-    opacity: .9;
+    background-color: rgba(74, 144, 226, 0.9);
 }
 .button:active {
     background-color: #3779c1;
@@ -329,6 +329,10 @@ header .menu li {
 .order__submit .button {
     background-color: #1b5dab;
     color: #fff;
+}
+
+.order__submit .button:hover {
+    background-color: rgba(27, 93, 171, .92);
 }
 .order__submit .button:active {
     background-color: #294390;
